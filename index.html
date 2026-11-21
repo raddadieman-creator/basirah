@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>بصيرة | عرض توضيحي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: هادئ ومتحفي، كبطاقة عرض في قاعة آثار
+   IDEA: لوحة شرح متحفية من الحجر الرملي يلمسها الزائر
+   PICTURE: رسم أمامي للتمثال بمناطقه الست، يضيء ما استُكشف
+   COLOUR and TYPE: بني داكن وحجر رملي ولمسة طين محروق؛ IBM Plex Sans Arabic
+   LAYOUT: رأس بشرفات نجدية، ثم الرسم بجوار لوحة التحكم والنص */
+:root{--bg:#f6efe3;--ink:#2a1e15;--brown:#3b2a1e;--sand:#e9dcc4;--terra:#9a4f22;--terra2:#c8763e;--line:#cdb897;--card:#fffaf2;--ok:#2f6b3a}
+:root[data-theme=dark]{--bg:#1d1611;--ink:#f3eadb;--card:#2a2019;--sand:#3a2d22;--line:#5a4634;--brown:#120d09}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "IBM Plex Sans Arabic",Tahoma,Arial,sans-serif;overflow-x:clip}
+body.lg{font-size:20px}
+body.hc{--bg:#000;--ink:#fff;--card:#000;--sand:#222;--line:#fff;--terra:#ffcf5a;--terra2:#ffcf5a;--brown:#000}
+.skip{position:absolute;inset-inline-start:-999px;top:8px;background:var(--terra);color:#fff;padding:8px 14px;border-radius:8px;z-index:9}
+.skip:focus{inset-inline-start:8px}
+header{background:var(--brown);color:#f3eadb;position:relative}
+header::after{content:"";position:absolute;inset-inline:0;bottom:-11px;height:12px;background:linear-gradient(135deg,var(--brown) 25%,transparent 25%) 0 0/24px 12px,linear-gradient(225deg,var(--brown) 25%,transparent 25%) 0 0/24px 12px}
+.hwrap{max-width:1180px;margin:auto;padding:14px max(4vw,16px);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.brand{font-weight:700;font-size:24px;display:flex;gap:10px;align-items:center}
+.brand small{font-weight:400;font-size:14px;color:#e9dcc4}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:#f3eadb;text-decoration:none;padding:9px 14px;border-radius:999px;font-size:15px;min-height:44px;display:inline-flex;align-items:center}
+nav a[aria-current=page]{background:var(--terra2);color:#fff}
+nav a:hover{background:rgba(255,255,255,.12)}
+main{max-width:1180px;margin:auto;padding:36px max(4vw,16px) 40px}
+h1{font-size:clamp(28px,4vw,42px);line-height:1.15;margin:0 0 10px;text-wrap:balance}
+h2{font-size:22px;margin:0 0 10px}
+h1[tabindex="-1"]:focus{outline:none}
+p{max-width:70ch}
+:focus-visible{outline:3px solid var(--terra2);outline-offset:3px}
+.lead{font-size:19px;color:inherit;opacity:.9}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:start}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.fig{background:var(--sand);border-radius:18px;padding:12px;display:flex;justify-content:center}
+.photo{margin:0;background:var(--sand);border-radius:18px;padding:10px;align-self:start}
+.photo img{display:block;width:100%;height:auto;border-radius:12px}
+.photo figcaption{font-size:14px;margin-top:6px;opacity:.85}
+.tour{margin:10px 0 26px}
+.tstage{position:relative;aspect-ratio:16/9;overflow:hidden;background:#2A1E15;border-radius:18px 18px 0 0}
+#tImg{position:absolute;left:0;top:0;width:1536px;height:1024px;max-width:none;transform-origin:0 0}
+#tSpot{position:absolute;border:3px solid #E0904F;border-radius:12px;pointer-events:none}
+.tbar{display:flex;align-items:center;gap:14px;background:#3B2A1E;color:#fff;border-radius:0 0 18px 18px;padding:12px 18px;border-top:4px solid #C8763E;min-height:64px}
+.tchip{background:#C8763E;color:#fff;font-weight:700;border-radius:999px;padding:4px 14px;white-space:nowrap}
+#tCap{margin:0;flex:1;line-height:1.6}
+.tnum{opacity:.8;direction:ltr;white-space:nowrap}
+.tour .btns{margin-top:10px}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0 22px}
+@media(max-width:860px){.photos{grid-template-columns:1fr}}
+.fig svg{width:100%;max-width:380px;height:auto}
+.zone{cursor:pointer}
+.zone .hit{fill:transparent}
+.zone.on .mark{fill:var(--terra2);opacity:.45}
+.zone.cur .mark{fill:var(--terra);opacity:.75}
+.zone:hover .mark{fill:var(--terra2);opacity:.3}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+button{font:inherit;font-size:16px;min-height:44px;padding:8px 16px;border-radius:12px;border:2px solid var(--terra);background:var(--card);color:var(--ink);cursor:pointer}
+button.pri{background:var(--terra);color:#fff;border-color:var(--terra)}
+button[aria-pressed=true]{background:var(--brown);color:#f3eadb;border-color:var(--brown)}
+body.hc button[aria-pressed=true]{background:#ffcf5a;color:#000}
+button:disabled{opacity:.45;cursor:not-allowed}
+.say{background:var(--brown);color:#f3eadb;border-radius:14px;padding:16px 18px;min-height:96px;font-size:18px}
+.say b{color:#ffd9a8;display:block;font-size:14px;margin-bottom:4px}
+.status{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.pill{background:var(--sand);border-radius:999px;padding:6px 14px;font-size:15px}
+.pill.ok{background:var(--ok);color:#fff}
+ul.zl{list-style:none;padding:0;margin:8px 0;display:grid;gap:6px}
+ul.zl li{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+ul.zl li button{flex:1;text-align:start;display:flex;gap:6px;align-items:center}
+.done{color:var(--ok);font-weight:700}
+.seq{counter-reset:s;padding:0;list-style:none;max-height:260px;overflow:auto;margin:8px 0}
+.seq li{padding:6px 10px;border-radius:8px;font-size:15px}
+.seq li.now{background:var(--terra2);color:#fff}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:start;vertical-align:top}
+th{background:var(--sand)}
+.note{font-size:14px;opacity:.85}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:30px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:22px}
+.steps .card b{display:block;color:var(--terra);font-size:15px}
+label.row{display:flex;gap:10px;align-items:center;min-height:44px;font-size:17px}
+input[type=checkbox]{width:22px;height:22px}
+input[type=range]{width:220px}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:18px max(4vw,16px);text-align:center;font-size:14px}
+@media (prefers-reduced-motion:no-preference){.zone .mark{transition:fill .25s,opacity .25s}}
+body.rm *{transition:none!important;animation:none!important}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lvl{font-size:13px;background:var(--sand);border-radius:999px;padding:1px 9px;margin-inline-start:auto}
+.sayPad{display:none}
+@media(max-width:860px){.say{position:fixed;inset-inline:10px;bottom:10px;z-index:6;max-height:34vh;overflow:auto;min-height:0;box-shadow:0 6px 24px rgba(0,0,0,.35)}.sayPad{display:block;height:170px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+<header><div class="hwrap">
+  <div class="brand" aria-label="بصيرة">بصيرة <small>دليل باللمس والوصف الصوتي</small></div>
+  <nav aria-label="الأقسام">
+    <a href="#home">الرئيسية</a><a href="#guide">جرّب الطريقة</a><a href="#station">المحطة</a><a href="#access">وضع الإتاحة</a><a href="#about">عن المشروع</a>
+  </nav>
+</div></header>
+
+<main id="main" tabindex="-1">
+
+<section data-page="home">
+  <div class="hero">
+    <div>
+      <h1>وصف يتبع يد الزائر</h1>
+      <p class="lead">«بصيرة» محطة في المتحف يلمس فيها الزائر الكفيف مجسمًا مطبوعًا لتمثال «رجل المعاناة»، ويقرأ معلوماته بطريقة برايل، ويسمع وصفه بالعربية بحسب ما لمسته يده.</p>
+      <div class="btns"><button class="pri" data-go="guide">جرّب الطريقة</button><button data-go="station">مكونات المحطة</button></div>
+      <p class="note">هذه الصفحة لتوضيح الفكرة فقط، ومخرج المشروع هو المجسم المطبوع.</p>
+    </div>
+    <figure class="photo"><img src="img/model.jpg" alt="النموذج الأولي المطبوع: مجسم تمثال رجل المعاناة على قاعدة، وبجانبه لوحة شرح مائلة عليها نص عربي وسطور برايل وزر للوصف الصوتي" width="1200" height="800"><figcaption>النموذج الأولي المطبوع من تصميم الفريق</figcaption></figure>
+  </div>
+  <div class="steps">
+    <div class="card"><b>المستوى 1</b>الشكل العام: اللمسة الأولى تعطي اسم المنطقة وموضعها</div>
+    <div class="card"><b>المستوى 2</b>التفاصيل: تسمعها عند لمس المنطقة مرة ثانية</div>
+    <div class="card"><b>المستوى 3</b>الملامح المنحوتة: تُفتح بعد لمس أربع مناطق والإجابة عن سؤال قصير</div>
+    <div class="card"><b>التحكم</b>تستطيع في أي وقت أن تكرر أو تتخطى أو توقف، والضغطة الطويلة على «تخطَّ» تنقلك إلى المستوى التالي</div>
+  </div>
+</section>
+
+<section data-page="guide" hidden>
+  <h1>جرّب الطريقة</h1>
+  <p>اختر الطريقة واضغط «ابدأ»، ثم المس مناطق التمثال في الرسم أو من القائمة. كل لمسة جديدة على المنطقة نفسها تنقلك إلى المستوى التالي كما في المجسم، وكل ما يُقال يظهر مكتوبًا في المربع الداكن.</p>
+  <div class="btns" role="group" aria-label="طريقة العرض">
+    <button id="mGraded" aria-pressed="true">الوصف يتبع اليد</button>
+    <button id="mFixed" aria-pressed="false">ترتيب ثابت (للمقارنة)</button>
+  </div>
+  <div class="grid">
+    <div class="fig" id="guideFig"></div>
+    <div>
+      <div class="say" aria-live="polite"><b>يُقال الآن</b><span id="sayText">اضغط «ابدأ» لبدء الجولة.</span></div>
+      <div class="btns">
+        <button class="pri" id="bStart">ابدأ</button>
+        <button id="bRepeat">كرّر</button>
+        <button id="bSkip">تخطَّ</button>
+        <button id="bStop">أوقف الصوت</button>
+        <button id="bReset">أعد الجولة</button>
+      </div>
+      <div id="gradedUI">
+        <div class="status"><span class="pill" id="pExplored">المناطق التي لمستها: 0 من 6</span><span class="pill" id="pL3">المستوى 3: مغلق</span></div>
+        <ul class="zl" id="zoneList" aria-label="مناطق التمثال"></ul>
+        <div class="btns">
+          <button id="bManual">انتقال يدوي إلى المستوى التالي</button>
+          <button id="bOverride" hidden>تابع إلى الملامح المنحوتة</button>
+        </div>
+        <p class="note">يقابل هذا الزر في المحطة الضغطة الطويلة على «تخطَّ»، ويُسجَّل كل استخدام له.</p>
+      </div>
+      <div id="fixedUI" hidden>
+        <div class="btns"><button class="pri" id="bNext">التالي</button></div>
+        <ol class="seq" id="seqList" aria-label="ترتيب الوصف الثابت"></ol>
+      </div>
+      <p class="note" id="logNote">الانتقالات اليدوية: 0</p>
+    </div>
+  </div>
+  <div class="sayPad" aria-hidden="true"></div>
+</section>
+
+<section data-page="station" hidden>
+  <h1>مكونات المحطة</h1>
+  <p>صمّم الفريق النموذج الحالي وطبعه بالطباعة ثلاثية الأبعاد: مجسم بارتفاع 18 سم على قاعدة 25 × 20 سم، ولوحة مائلة عليها نص عربي وسطور برايل، وزر واحد للوصف الصوتي.</p>
+  <div class="photos">
+    <figure class="photo"><img src="img/model.jpg" alt="النموذج الأولي المطبوع من الأمام: المجسم ولوحة الشرح وزر الوصف الصوتي" width="1200" height="800"><figcaption>النموذج المطبوع</figcaption></figure>
+    <figure class="photo"><img src="img/specs.jpg" alt="لوحة مواصفات النموذج: المقاسات وصور المجسم من جميع الجهات وتفاصيل الوجه وزر الوصف الصوتي" width="1200" height="800"><figcaption>لوحة المواصفات من تصميم الفريق، ونص اللوحة مسودة سنراجعها</figcaption></figure>
+  </div>
+  <h2>جولة في لوحة المواصفات</h2>
+  <p>اضغط «تشغيل» لتقترب الصورة من أجزاء النموذج واحدًا بعد آخر، مع جملة تشرح كل جزء. ويمكن التنقل بين الأجزاء بزري «السابق» و«التالي».</p>
+  <div class="tour">
+    <div class="tstage" id="tStage"><img id="tImg" src="img/specs_full.jpg" alt="لوحة مواصفات النموذج من تصميم الفريق"><div id="tSpot" aria-hidden="true"></div></div>
+    <div class="tbar"><span class="tchip" id="tChip"></span><p id="tCap" aria-live="polite"></p><span class="tnum" id="tNum"></span></div>
+    <div class="btns"><button id="tPrev">السابق</button><button id="tPlay" class="pri">تشغيل</button><button id="tNext">التالي</button></div>
+  </div>
+  <h2>ما سنضيفه إلى النموذج</h2>
+  <p>الرسم يوضح الإضافات التي يحتاجها الوصف المتدرج، والأرقام فيه تقابل الجدول.</p>
+  <div class="grid">
+    <div class="fig" id="stationFig"></div>
+    <div class="card">
+      <table>
+        <thead><tr><th>المكون</th><th>النموذج الحالي</th><th>الإضافة المقترحة</th></tr></thead>
+        <tbody>
+          <tr><td>1. نقاط اللمس</td><td>لا توجد</td><td>ست نقاط لمس على مناطق المجسم، وكل لمسة جديدة على النقطة نفسها تنقل إلى المستوى التالي</td></tr>
+          <tr><td>2. أزرار التحكم</td><td>زر صوت واحد</td><td>أربعة أزرار بارزة بأشكال مختلفة في صف على الحافة الأمامية، حول علامة بارزة في المنتصف، وتحت كل زر كلمته بطريقة برايل: البدء، والتكرار، والتخطي، والإيقاف. والضغطة الطويلة على التخطي تنقل إلى المستوى التالي</td></tr>
+          <tr><td>3. الصوت</td><td>زر توضيحي</td><td>مكبر صوت ومخرج سماعات، ووصف مسجل بصوت بشري</td></tr>
+          <tr><td>4. لوحة الشرح</td><td>نص عربي وسطور برايل</td><td>نص يُراجَع مع المتحف، وبرايل يراجعه قارئ برايل</td></tr>
+          <tr><td>5. المعالجة</td><td>غير موجودة</td><td>متحكم صغير داخل القاعدة يطبق القواعد</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section data-page="access" hidden>
+  <h1>وضع الإتاحة</h1>
+  <div class="card" style="max-width:620px">
+    <label class="row"><input type="checkbox" id="oHc"> تباين عالٍ</label>
+    <label class="row"><input type="checkbox" id="oLg"> نص كبير</label>
+    <label class="row"><input type="checkbox" id="oRm"> تقليل الحركة</label>
+    <label class="row"><input type="checkbox" id="oVoice" checked> نطق الوصف بالصوت</label>
+    <label class="row" for="oRate">سرعة النطق <input type="range" id="oRate" min="0.6" max="1.4" step="0.1" value="1"> <span id="rateVal">1.0</span></label>
+    <p class="note">لا يبدأ الصوت إلا بضغطة منك، وكل ما يُنطق مكتوب في الصفحة، ويمكن استخدام الصفحة كلها بلوحة المفاتيح.</p>
+    <p class="note" id="voiceNote"></p>
+  </div>
+</section>
+
+<section data-page="about" hidden>
+  <h1>عن المشروع</h1>
+  <div class="grid">
+    <div class="card">
+      <h2>الفكرة</h2>
+      <p>مشروع ابتكار اجتماعي في مسار السياحة والتراث. نقترح فيه دليلًا يجمع اللمس والوصف الصوتي، لا يسمع فيه الزائر تفاصيل منطقة قبل أن يلمسها، وتُفتح له الملامح المنحوتة بعد أربع مناطق وسؤال قصير، ويستطيع أن يغيّر الترتيب متى شاء.</p>
+      <h2>القطعة</h2>
+      <p>تمثال من الحجر الرملي عُثر عليه قرب بلدة الكهفة، على بعد نحو 200 كيلومتر جنوب حائل، ويُقدَّر عمره بأكثر من ستة آلاف عام (وكالة الأنباء السعودية، 2020). ولم نجد مصدرًا متحفيًا رسميًا يحدد تأريخه الدقيق أو مكان عرضه الحالي.</p>
+    </div>
+    <div class="card">
+      <h2>حدود هذه الصفحة</h2>
+      <p>هذه الصفحة لتوضيح الفكرة، ومخرج المشروع هو المجسم المطبوع. والرسم تقريبي من واجهة التمثال، والنطق هنا آلي من المتصفح، أما في المحطة فسيُسجَّل الوصف بصوت بشري بعد مراجعة المتحف.</p>
+      <h2>المصدر</h2>
+      <p>وكالة الأنباء السعودية. (2020). تقرير / قطع أثرية سعودية اشتهرت عالميًا بقيمتها الفنية والتاريخية. <a href="https://www.spa.gov.sa/2092275">spa.gov.sa/2092275</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>بصيرة | مشروع ابتكار اجتماعي في السياحة والتراث<br>تصميم: Research by Eman</footer>
+
+<script>
+{
+const Z=[
+ {id:"head",name:"الرأس",lv:["الرأس: في أعلى التمثال، فوق الكتفين.","الرأس مستدير، وعلى جانبيه بروزان صغيران.","حدود الرأس واضحة عند التقائه بالكتفين."],cue:"الرأس في أعلى التمثال، فوق الكتفين."},
+ {id:"eyes",name:"العينان",lv:["العينان: في النصف العلوي من الوجه.","عينان غائرتان على جانبي بداية الأنف.","الحفر حول العينين عميق، فتُحَسّ العينان منخفضتين عن سطح الوجه."],cue:"العينان في أعلى الوجه، على جانبي بداية الأنف."},
+ {id:"nose",name:"الأنف",lv:["الأنف: في منتصف الوجه.","أنف طويل يمتد من بين العينين إلى ما فوق الفم.","للأنف حافتان مستقيمتان على جانبيه."],cue:"الأنف في منتصف الوجه، بين العينين والفم."},
+ {id:"mouth",name:"الفم",lv:["الفم: في أسفل الوجه.","فم صغير منحدر الطرفين.","الفم خط منحوت ينحدر طرفاه إلى الأسفل. ويرى بعض علماء الآثار أن هذا الانحدار يعبّر عن الحزن، وهذا رأيهم في معنى الشكل."],cue:"الفم أسفل الأنف مباشرة."},
+ {id:"chest",name:"الخطان على الصدر",lv:["الخطان المنحوتان: في أعلى الجذع.","خطان ينزلان من الكتفين ويلتقيان وسط الصدر على هيئة حرف V.","يبدأ كل خط عند أحد الكتفين، ويلتقي الخطان في نقطة واحدة وسط الصدر."],cue:"الخطان في أعلى الجذع، أسفل الكتفين."},
+ {id:"forearm",name:"الساعد",lv:["الساعد: في الجزء السفلي من الجذع.","ساعد أفقي منحوت أسفل الجذع.","تحيط بالساعد خطوط محفورة تفصله عن سطح الجذع. وتصف بعض المصادر اليد بأنها على القلب، أما موضعها الظاهر فأسفل الجذع."],cue:"الساعد في أسفل الجذع، تحت نقطة التقاء الخطين."}];
+const OVERVIEW="تمثال من الحجر الرملي على هيئة إنسان: رأس مستدير فوق جذع مسطح مستطيل تقريبًا. تظهر في الواجهة الأمامية ملامح الوجه، وخطان منحوتان على الصدر، وساعد منحوت أسفل الجذع.";
+const CHECK={q:"سؤال تحقق: المس موضع الساعد.",target:"forearm",hint:"الساعد في أسفل الجذع، تحت نقطة التقاء الخطين."};
+const NEED=4,MAXTRY=2;
+const $=s=>document.querySelector(s);
+
+/* ---------- الرسم ---------- */
+function stele(prefix){
+  const marks={
+    head:'<ellipse class="mark" cx="150" cy="92" rx="66" ry="72" fill="transparent"/>',
+    eyes:'<rect class="mark" x="112" y="62" width="76" height="30" rx="12" fill="transparent"/>',
+    nose:'<rect class="mark" x="138" y="86" width="24" height="46" rx="10" fill="transparent"/>',
+    mouth:'<rect class="mark" x="124" y="132" width="52" height="22" rx="10" fill="transparent"/>',
+    chest:'<path class="mark" d="M78 180 L222 180 L150 270 Z" fill="transparent"/>',
+    forearm:'<rect class="mark" x="84" y="318" width="132" height="40" rx="18" fill="transparent"/>'};
+  const g=Z.map(z=>`<g class="zone" data-z="${z.id}" id="${prefix}-${z.id}">${marks[z.id]}<title>${z.name}</title></g>`).join('');
+  return `<svg viewBox="0 0 300 460" role="img" aria-label="رسم أمامي تقريبي لتمثال رجل المعاناة بمناطقه الست">
+  <defs><pattern id="${prefix}tx" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".9" fill="#a0805c" opacity=".35"/><circle cx="6" cy="6" r=".7" fill="#7a5a3a" opacity=".3"/></pattern></defs>
+  <ellipse cx="150" cy="440" rx="120" ry="12" fill="#000" opacity=".12"/>
+  <path d="M70 168 Q70 156 84 154 L216 154 Q230 156 230 168 L236 420 Q236 432 222 432 L78 432 Q64 432 64 420 Z" fill="#c9a77c"/>
+  <path d="M70 168 Q70 156 84 154 L216 154 Q230 156 230 168 L236 420 Q236 432 222 432 L78 432 Q64 432 64 420 Z" fill="url(#${prefix}tx)"/>
+  <ellipse cx="86" cy="94" rx="10" ry="18" fill="#c19d70"/><ellipse cx="214" cy="94" rx="10" ry="18" fill="#c19d70"/>
+  <ellipse cx="150" cy="92" rx="64" ry="70" fill="#d1b086"/><ellipse cx="150" cy="92" rx="64" ry="70" fill="url(#${prefix}tx)"/>
+  <path d="M114 70 Q132 60 148 74 M186 70 Q168 60 152 74" stroke="#7a5a3a" stroke-width="3" fill="none"/>
+  <ellipse cx="130" cy="80" rx="11" ry="6" fill="#6e5236"/><ellipse cx="170" cy="80" rx="11" ry="6" fill="#6e5236"/>
+  <path d="M146 78 L144 126 Q150 132 156 126 L154 78" fill="#c09a6c" stroke="#8a6a46" stroke-width="2"/>
+  <path d="M130 148 Q150 136 170 148" stroke="#6e5236" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M86 184 L150 262 L214 184" stroke="#7a5a3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <rect x="90" y="326" width="120" height="22" rx="11" fill="#bc976a" stroke="#7a5a3a" stroke-width="2.5"/>
+  <path d="M100 330 L198 346 M100 344 L198 330" stroke="#8a6a46" stroke-width="1.2" opacity=".6"/>
+  ${g}</svg>`;
+}
+$('#guideFig').innerHTML=stele('g');
+$('#stationFig').innerHTML=`<svg viewBox="0 0 420 300" role="img" aria-label="رسم للمحطة: المجسم على القاعدة بنقاط لمس، ولوحة شرح مائلة بأزرار بارزة وسماعة">
+ <ellipse cx="210" cy="282" rx="190" ry="10" fill="#000" opacity=".12"/>
+ <path d="M24 236 L396 236 L380 270 L40 270 Z" fill="#e6dccb" stroke="#bfae95"/>
+ <rect x="40" y="226" width="340" height="12" rx="4" fill="#efe6d6" stroke="#bfae95"/>
+ <rect x="74" y="210" width="86" height="18" rx="3" fill="#e9dfcf" stroke="#bfae95"/>
+ <rect x="86" y="92" width="62" height="120" rx="6" fill="#c9a77c"/>
+ <ellipse cx="117" cy="68" rx="26" ry="30" fill="#d1b086"/>
+ <path d="M96 110 L117 140 L138 110" stroke="#7a5a3a" stroke-width="2" fill="none"/>
+ <rect x="94" y="176" width="46" height="8" rx="4" fill="#bc976a"/>
+ ${[[117,58],[109,64],[117,74],[117,86],[117,128],[117,180]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="4.5" fill="#c8763e" stroke="#fff" stroke-width="1.5"/>`).join('')}
+ <path d="M196 226 L216 96 L372 96 L372 226 Z" fill="#efe6d6" stroke="#bfae95"/>
+ <rect x="232" y="110" width="124" height="8" rx="2" fill="#6b4a33"/>
+ <rect x="236" y="126" width="116" height="4" rx="2" fill="#a08b74"/><rect x="236" y="135" width="116" height="4" rx="2" fill="#a08b74"/><rect x="236" y="144" width="96" height="4" rx="2" fill="#a08b74"/>
+ ${Array.from({length:3},(_,r)=>Array.from({length:14},(_,c)=>`<circle cx="${238+c*8}" cy="${158+r*7}" r="1.4" fill="#8a7560"/>`).join('')).join('')}
+ <circle cx="236" cy="205" r="9" fill="#9a4f22"/><path d="M276 196 L286 214 L266 214 Z" fill="#9a4f22"/><rect x="298" y="196" width="18" height="18" fill="#9a4f22"/><path d="M340 194 L350 205 L340 216 L330 205 Z" fill="#9a4f22"/>
+ <circle cx="362" cy="122" r="7" fill="none" stroke="#3b2a1e" stroke-width="2"/><circle cx="362" cy="122" r="3" fill="#3b2a1e"/>
+ ${[[60,70,1],[286,232,2],[386,112,3],[300,176,4],[210,256,5]].map(([x,y,n])=>`<circle cx="${x}" cy="${y}" r="11" fill="#3b2a1e"/><text x="${x}" y="${y+4.5}" text-anchor="middle" font-size="13" fill="#fff" font-family="Arial">${n}</text>`).join('')}
+ <path d="M71 70 L104 64" stroke="#3b2a1e" stroke-width="1.2"/>
+</svg>`;
+
+/* ---------- الإعدادات ---------- */
+const store={get(k,d){try{const v=localStorage.getItem('basirah.'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('basirah.'+k,JSON.stringify(v))}catch(e){}}};
+const opts={hc:store.get('hc',false),lg:store.get('lg',false),rm:store.get('rm',false),voice:store.get('voice',true),rate:store.get('rate',1)};
+function applyOpts(){document.body.classList.toggle('hc',opts.hc);document.body.classList.toggle('lg',opts.lg);document.body.classList.toggle('rm',opts.rm);
+  $('#oHc').checked=opts.hc;$('#oLg').checked=opts.lg;$('#oRm').checked=opts.rm;$('#oVoice').checked=opts.voice;$('#oRate').value=opts.rate;$('#rateVal').textContent=Number(opts.rate).toFixed(1);}
+['hc','lg','rm','voice'].forEach(k=>{const el=$('#o'+k[0].toUpperCase()+k.slice(1));el.addEventListener('change',()=>{opts[k]=el.checked;store.set(k,opts[k]);applyOpts();});});
+$('#oRate').addEventListener('input',e=>{opts.rate=Number(e.target.value);store.set('rate',opts.rate);applyOpts();});
+applyOpts();
+const synth=('speechSynthesis' in window)?window.speechSynthesis:null;
+$('#voiceNote').textContent=synth?'يستخدم النطق الصوت العربي المتاح في متصفحك، وقد يختلف من جهاز إلى آخر.':'متصفحك لا يدعم النطق الآلي، ويبقى الوصف معروضًا نصًا.';
+
+/* ---------- النطق ---------- */
+let last='';
+function say(t){last=t;$('#sayText').textContent=t;
+  if(!synth||!opts.voice) return;
+  try{synth.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=opts.rate;
+    const v=synth.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;synth.speak(u);}catch(e){}}
+function hush(){try{synth&&synth.cancel()}catch(e){}}
+
+/* ---------- الحالة ---------- */
+const LOCK="تُفتح الملامح المنحوتة بعد أن تلمس أربع مناطق وتجيب عن سؤال قصير.";
+const S={mode:'graded',started:false,explored:new Set(),lvl:{},cur:null,l3:false,check:false,deferred:false,tries:0,manual:0,step:-1};
+const seq=[{z:null,t:OVERVIEW}].concat([0,1,2].flatMap(l=>Z.map(z=>({z:z.id,t:z.lv[l],l}))));
+$('#seqList').innerHTML=seq.map((s,i)=>`<li id="sq${i}">${i===0?'الوصف العام':`${Z.find(z=>z.id===s.z).name}، المستوى ${s.l+1}`}</li>`).join('');
+const byId=id=>Z.find(z=>z.id===id);
+function render(){
+  document.querySelectorAll('#guideFig .zone').forEach(g=>{const id=g.dataset.z;g.classList.toggle('on',S.mode==='graded'&&S.explored.has(id));g.classList.toggle('cur',S.cur===id);});
+  $('#pExplored').textContent=`المناطق التي لمستها: ${S.explored.size} من 6`;
+  const p=$('#pL3');p.textContent=S.l3?'المستوى 3: مفتوح':(S.check?'المستوى 3: بانتظار سؤال التحقق':(S.deferred?'المستوى 3: سؤال التحقق مؤجل':'المستوى 3: مغلق'));p.classList.toggle('ok',S.l3);
+  $('#zoneList').innerHTML=Z.map(z=>{const ex=S.explored.has(z.id),l=S.lvl[z.id]||0;
+    return `<li><button data-touch="${z.id}" id="t-${z.id}">${ex?'<span class="done" aria-hidden="true">✓</span>':''}<span>المس: ${z.name}</span>${ex?`<span class="sr">، مستكشفة</span><span class="lvl">آخر مستوى: ${l}</span>`:''}</button></li>`}).join('');
+  $('#bManual').disabled=!S.cur||!S.started;
+  $('#bOverride').hidden=!(S.check&&S.tries>=MAXTRY);
+  $('#logNote').textContent=`الانتقالات اليدوية: ${S.manual}`;
+  document.querySelectorAll('#seqList li').forEach((li,i)=>li.classList.toggle('now',i===S.step));
+  $('#gradedUI').hidden=S.mode!=='graded';$('#fixedUI').hidden=S.mode!=='fixed';
+  $('#mGraded').setAttribute('aria-pressed',S.mode==='graded');$('#mFixed').setAttribute('aria-pressed',S.mode==='fixed');
+}
+function keepFocus(fn){const id=document.activeElement&&document.activeElement.id;fn();if(id){const el=document.getElementById(id);if(el)el.focus();}}
+function reset(){Object.assign(S,{started:false,explored:new Set(),lvl:{},cur:null,l3:false,check:false,deferred:false,tries:0,manual:0,step:-1});hush();say('اضغط «ابدأ» لبدء الجولة.');render();}
+function start(){S.started=true;if(S.mode==='graded'){say(OVERVIEW+' المس أي منطقة لتسمع اسمها وموضعها، ثم المسها مرة أخرى لتسمع تفاصيلها.');}else{S.step=0;say(seq[0].t);}render();}
+function explore(id){if(!S.explored.has(id)){S.explored.add(id);}S.cur=id;}
+function maybeAsk(){ /* يُطرح السؤال بعد أربع مناطق، أو يُعاد بعد تأجيله */
+  if(S.l3||S.check) return '';
+  if(S.deferred||S.explored.size>=NEED){const again=S.deferred;S.deferred=false;S.check=true;if(!again)S.tries=0;
+    return again?' '+CHECK.q:' لمست أربع مناطق. '+CHECK.q;}
+  return '';}
+function touch(id){
+  if(S.mode==='fixed'){say('في الترتيب الثابت يتقدم الوصف بزر «التالي»، وهو الترتيب نفسه لكل الزوار.');return;}
+  if(!S.started){say('اضغط «ابدأ» أولًا.');return;}
+  if(S.check){
+    if(id===CHECK.target){S.check=false;S.l3=true;explore(id);if(!S.lvl[id])S.lvl[id]=1;
+      say('أحسنت. صارت اللمسة الثالثة على أي منطقة تعطيك ملامحها المنحوتة.');}
+    else{S.tries++;say(S.tries>=MAXTRY?CHECK.hint+' ويمكنك فتح المستوى الثالث والمتابعة.':CHECK.hint+' حاول مرة أخرى.');}
+    render();return;}
+  const z=byId(id);let next=(S.lvl[id]||0)+1;if(next>3)next=1;
+  explore(id);let t;
+  if(next===3&&!S.l3){S.lvl[id]=0;t=z.name+': '+LOCK+' اللمسة التالية تعيدك إلى المستوى الأول.';}
+  else{S.lvl[id]=next;t=z.lv[next-1];}
+  t+=maybeAsk();say(t);render();}
+function manual(){if(!S.cur)return;const z=byId(S.cur);let next=(S.lvl[S.cur]||0)+1;if(next>3)next=1;
+  S.lvl[S.cur]=next;S.manual++;say('انتقال يدوي: '+z.lv[next-1]);render();}
+function next(){if(!S.started){say('اضغط «ابدأ» أولًا.');return;}
+  if(S.step<seq.length-1){S.step++;const s=seq[S.step];S.cur=s.z;say(s.t);}else say('انتهى الوصف.');render();}
+function skip(){hush();if(S.mode==='fixed'){next();return;}
+  if(S.check){S.check=false;S.deferred=true;say('أجّلنا السؤال، وسنعيده بعد لمستك التالية.');render();return;}
+  say('تخطيت. المس منطقة أخرى.');}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button,[data-z]');if(!b)return;
+  if(b.dataset.go){location.hash=b.dataset.go;return;}
+  if(b.dataset.touch){keepFocus(()=>touch(b.dataset.touch));return;}
+  if(b.closest('#guideFig')&&b.dataset.z){touch(b.dataset.z);return;}
+  switch(b.id){
+    case'bStart':start();break;case'bRepeat':last&&say(last);break;case'bSkip':skip();break;case'bStop':hush();break;case'bReset':reset();break;
+    case'bManual':keepFocus(manual);break;case'bOverride':S.l3=true;S.check=false;S.manual++;say('فُتحت الملامح المنحوتة، وسُجّل ذلك انتقالًا يدويًا.');render();break;
+    case'bNext':next();break;
+    case'mGraded':S.mode='graded';reset();break;case'mFixed':S.mode='fixed';reset();break;
+  }
+});
+
+/* ---------- التنقل ---------- */
+const pages=['home','guide','station','access','about'];let first=true;
+function route(){const h=(location.hash||'#home').slice(1);const pg=pages.includes(h)?h:'home';
+  document.querySelectorAll('[data-page]').forEach(s=>s.hidden=s.dataset.page!==pg);
+  document.querySelectorAll('nav a').forEach(a=>a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+pg));
+  document.querySelectorAll('nav a[aria-current]').forEach(a=>a.setAttribute('aria-current','page'));
+  if(!first){const h1=document.querySelector(`[data-page="${pg}"] h1`);if(h1){h1.tabIndex=-1;h1.focus();}}first=false;hush();}
+window.addEventListener('hashchange',route);route();render();
+
+/* ---------- جولة لوحة المواصفات ---------- */
+/* جولة لوحة المواصفات: محرك مشترك بين الصفحة والفيديو */
+const TOUR_IMW=1536, TOUR_IMH=1024;
+const TOUR=[
+ {r:null, t:"النموذج الأولي", c:"النموذج الأولي لمحطة «بصيرة» كما صممه الفريق وطبعه بالطباعة ثلاثية الأبعاد.", d:5},
+ {r:[38,13,384,550], t:"المجسم", c:"مجسم تمثال «رجل المعاناة» بارتفاع 18 سم، بملمس يحاكي الحجر الرملي.", d:5.5},
+ {r:[190,30,160,165], t:"الوجه", c:"ملامح الوجه بارزة: العينان والأنف والفم، يتعرف عليها الزائر بأصابعه.", d:5.5},
+ {r:[384,112,372,214], t:"لوحة الشرح", c:"لوحة مائلة عليها اسم القطعة ونبذة عنها بالعربية. والنص مسودة سنراجعها مع المتحف.", d:6},
+ {r:[390,318,328,112], t:"برايل", c:"تحت النص سطور برايل، يقرأ منها الزائر الكفيف المعلومات الأساسية.", d:5.5},
+ {r:[365,432,348,98], t:"زر الوصف الصوتي", c:"يضغط الزائر هذا الزر فيسمع وصف القطعة. وفي المحطة الكاملة تصبح الأزرار أربعة.", d:6},
+ {r:[855,10,672,512], t:"المقاسات", c:"قاعدة 25 × 20 سم، ولوحة شرح مائلة بزاوية 70 درجة، وارتفاع كلي نحو 20 سم.", d:6},
+ {r:[850,565,300,440], t:"تفاصيل عن قرب", c:"نقوش الوجه، ونقاط برايل البارزة، وزر الصوت، كما تبدو عن قرب.", d:5.5},
+ {r:[19,627,826,390], t:"المجسم من كل الجهات", c:"صور المجسم من الأمام والخلف والجانبين ومن الأعلى.", d:5},
+ {r:[1158,550,374,461], t:"مواصفات الطباعة", c:"يُطبع النموذج بمادة PLA أو الراتنج، وسماكة القاعدة بين 1 و1.5 سم.", d:5.5},
+ {r:null, t:"الخطوة التالية", c:"بعد هذا النموذج نضيف نقاط اللمس والأزرار، ليتبع الوصف يد الزائر.", d:5.5},
+];
+const TOUR_T=1.2;
+const TOUR_STARTS=[];{let a=0;for(const s of TOUR){TOUR_STARTS.push(a);a+=s.d;}}
+const TOUR_TOTAL=TOUR.reduce((a,s)=>a+s.d,0);
+function tourEase(p){return p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;}
+function tourCam(r,W,H,maxZ){
+  const fit=Math.min(W/TOUR_IMW,H/TOUR_IMH);
+  const R=r||[0,0,TOUR_IMW,TOUR_IMH];
+  let s=r?Math.min(.84*W/R[2],.78*H/R[3]):fit;
+  s=Math.max(fit,Math.min(s,fit*maxZ));
+  let tx=W/2-s*(R[0]+R[2]/2), ty=H/2-s*(R[1]+R[3]/2);
+  const iw=s*TOUR_IMW, ih=s*TOUR_IMH;
+  tx= iw<=W ? (W-iw)/2 : Math.min(0,Math.max(W-iw,tx));
+  ty= ih<=H ? (H-ih)/2 : Math.min(0,Math.max(H-ih,ty));
+  return {s, cx:(W/2-tx)/s, cy:(H/2-ty)/s};
+}
+/* حالة الجولة عند الزمن t: الكاميرا، والإطار المضيء، والنص */
+function tourState(t,W,H,maxZ){
+  t=Math.max(0,Math.min(TOUR_TOTAL-1e-6,t));
+  let i=0;while(i<TOUR.length-1&&t>=TOUR_STARTS[i+1])i++;
+  const cur=TOUR[i], prev=i>0?TOUR[i-1]:cur;
+  const lt=t-TOUR_STARTS[i];
+  const p= i>0&&lt<TOUR_T ? tourEase(lt/TOUR_T) : 1;
+  const a=tourCam(prev.r,W,H,maxZ), b=tourCam(cur.r,W,H,maxZ);
+  const s=Math.exp(Math.log(a.s)+(Math.log(b.s)-Math.log(a.s))*p);
+  const cx=a.cx+(b.cx-a.cx)*p, cy=a.cy+(b.cy-a.cy)*p;
+  const full=[0,0,TOUR_IMW,TOUR_IMH];
+  const ra=prev.r||full, rb=cur.r||full;
+  const rr=ra.map((v,k)=>v+(rb[k]-v)*p);
+  const da=prev.r?1:0, db=cur.r?1:0, dim=da+(db-da)*p;
+  const inT=i>0&&lt<TOUR_T, half=lt/TOUR_T;
+  const txt= inT&&half<.5 ? prev : cur;
+  const op= inT ? Math.abs(1-2*half) : 1;
+  return {i, s, tx:W/2-s*cx, ty:H/2-s*cy, rect:rr, dim, txt, op};
+}
+
+(function(){
+  const st$=$('#tStage'),im=$('#tImg'),sp=$('#tSpot');let t=0,playing=false,stopAt=null,lastI=-1,prevTs=null;
+  const reduced=()=>document.body.classList.contains('rm')||matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw(){const W=st$.clientWidth,H=st$.clientHeight;if(!W)return;const s=tourState(t,W,H,2.6),P=8,r=s.rect;
+    im.style.transform=`translate(${s.tx}px,${s.ty}px) scale(${s.s})`;
+    Object.assign(sp.style,{left:(s.tx+s.s*r[0]-P)+'px',top:(s.ty+s.s*r[1]-P)+'px',width:(s.s*r[2]+2*P)+'px',height:(s.s*r[3]+2*P)+'px',boxShadow:`0 0 0 3000px rgba(20,12,6,${.68*s.dim})`,opacity:s.dim});
+    if(s.i!==lastI){lastI=s.i;$('#tChip').textContent=TOUR[s.i].t;$('#tCap').textContent=TOUR[s.i].c;$('#tNum').textContent=`${s.i+1} / ${TOUR.length}`;}}
+  function idx(){let i=0;while(i<TOUR.length-1&&t>=TOUR_STARTS[i+1])i++;return i;}
+  function loop(ts){if(!playing&&stopAt===null){prevTs=null;return;}
+    if(st$.closest('section').hidden){pause();return;}
+    const dt=prevTs===null?0:(ts-prevTs)/1000;prevTs=ts;
+    if(playing&&reduced()){const i=idx(),end=TOUR_STARTS[i]+TOUR[i].d;t+=dt;if(t<TOUR_STARTS[i]+TOUR_T&&i>0)t=TOUR_STARTS[i]+TOUR_T;}
+    else t+=dt;
+    if(stopAt!==null&&t>=stopAt){t=stopAt;stopAt=null;prevTs=null;draw();return;}
+    if(t>=TOUR_TOTAL){t=TOUR_TOTAL-1e-3;pause();$('#tPlay').textContent='أعد الجولة';draw();return;}
+    draw();requestAnimationFrame(loop);}
+  function play(){if(t>=TOUR_TOTAL-0.01)t=0;playing=true;stopAt=null;prevTs=null;$('#tPlay').textContent='إيقاف مؤقت';requestAnimationFrame(loop);}
+  function pause(){playing=false;stopAt=null;prevTs=null;$('#tPlay').textContent='تشغيل';}
+  function go(j){j=Math.max(0,Math.min(TOUR.length-1,j));const fwd=j===idx()+1;
+    if(fwd&&!reduced()){t=TOUR_STARTS[j];if(!playing){stopAt=TOUR_STARTS[j]+TOUR_T;prevTs=null;requestAnimationFrame(loop);}}
+    else{t=TOUR_STARTS[j]+(j>0?TOUR_T:0);}draw();}
+  $('#tPlay').addEventListener('click',()=>playing?pause():play());
+  $('#tNext').addEventListener('click',()=>go(idx()+1));
+  $('#tPrev').addEventListener('click',()=>go(idx()-1));
+  addEventListener('resize',draw);addEventListener('hashchange',()=>setTimeout(draw,50));
+  if(im.complete)draw();else im.addEventListener('load',draw);
+})();
+}
+</script>
+</body>
+</html>
